@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Personalized Plan - Overwhelmed Learner</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 50px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .proficiency-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        @media (max-width: 600px) {
+            .proficiency-section {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .proficiency-card {
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .weak-card {
+            background: #ffe8e8;
+            border-left: 4px solid #d32f2f;
+        }
+        
+        .strong-card {
+            background: #e8f5e9;
+            border-left: 4px solid #2e7d32;
+        }
+        
+        .card-title {
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .weak-card .card-title {
+            color: #b71c1c;
+        }
+        
+        .strong-card .card-title {
+            color: #1b5e20;
+        }
+        
+        .topic-list {
+            list-style: none;
+        }
+        
+        .topic-list li {
+            padding: 6px 0;
+            font-size: 14px;
+            color: #333;
+        }
+        
+        .topic-list li:before {
+            content: "→ ";
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        .weak-card li:before {
+            color: #d32f2f;
+        }
+        
+        .strong-card li:before {
+            color: #2e7d32;
+        }
+        
+        .plan-section {
+            margin-bottom: 40px;
+        }
+        
+        .plan-section h2 {
+            color: #333;
+            font-size: 20px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+        
+        .plan-content {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            line-height: 1.8;
+            color: #444;
+            font-size: 15px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .action-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+        
+        .action-button:hover {
+            transform: translateY(-2px);
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>✨ Your Personalized Learning Path</h1>
+        </div>
+        
+        <div class="proficiency-section">
+            {% if proficiency.get('arrays') or proficiency.get('recursion') or proficiency.get('sorting') %}
+            <div>
+                <div class="proficiency-card weak-card">
+                    <div class="card-title">📌 Focus Areas (Weak)</div>
+                    {% if plan.weak_topics %}
+                    <ul class="topic-list">
+                        {% for topic in plan.weak_topics %}
+                        <li>{{ topic.capitalize() }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p style="color: #333; font-size: 14px;">None - you're solid!</p>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div>
+                <div class="proficiency-card strong-card">
+                    <div class="card-title">🎯 Strong Areas (Skip These)</div>
+                    {% if plan.strong_topics %}
+                    <ul class="topic-list">
+                        {% for topic in plan.strong_topics %}
+                        <li>{{ topic.capitalize() }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p style="color: #333; font-size: 14px;">None - you need to learn everything</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        
+        <div class="plan-section">
+            <h2>📚 Your Personalized Study Plan</h2>
+            <div class="plan-content">{{ plan.plan }}</div>
+        </div>
+        
+        <div class="footer">
+            <a href="/" class="action-button">← Retake Quiz</a>
+        </div>
+    </div>
+</body>
+</html>

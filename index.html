@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overwhelmed Learner - AI Personalized Tutor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 50px;
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+        }
+        
+        .info {
+            background: #f0f7ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 30px;
+            font-size: 13px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧠 Overwhelmed Learner</h1>
+            <p>Personalized Learning, Not Information Dumping</p>
+        </div>
+        
+        <div class="info">
+            <strong>How it works:</strong> Tell us your constraints, take a quick diagnostic quiz, and get a personalized learning path based on YOUR knowledge level.
+        </div>
+        
+        <form action="/quiz" method="POST">
+            <div class="form-group">
+                <label>Daily Study Time (hours):</label>
+                <input type="number" name="daily_time" min="1" max="8" value="2" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Days Until Interview:</label>
+                <input type="number" name="days" min="1" max="30" value="7" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Current Stress Level (1-10):</label>
+                <input type="number" name="stress" min="1" max="10" value="5" required>
+            </div>
+            
+            <button type="submit">Start Diagnostic Quiz →</button>
+        </form>
+    </div>
+</body>
+</html>

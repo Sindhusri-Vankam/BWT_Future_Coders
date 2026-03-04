@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnostic Quiz - Overwhelmed Learner</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 700px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+        
+        .header h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        
+        .header p {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .question-block {
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .question-block:last-child {
+            border-bottom: none;
+        }
+        
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 12px;
+        }
+        
+        .question-text {
+            color: #333;
+            font-weight: 600;
+            font-size: 15px;
+            flex: 1;
+        }
+        
+        .level-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-left: 10px;
+            white-space: nowrap;
+        }
+        
+        .level-beginner {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        
+        .level-intermediate {
+            background: #fff3e0;
+            color: #e65100;
+        }
+        
+        .level-advanced {
+            background: #f3e5f5;
+            color: #6a1b9a;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.2s;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📋 Diagnostic Quiz</h1>
+            <p>Answer honestly to get an accurate learning path. Skills you know will be skipped!</p>
+        </div>
+        
+        <form action="/result" method="POST">
+            <input type="hidden" name="daily_time" value="{{ daily_time }}">
+            <input type="hidden" name="days" value="{{ days }}">
+            <input type="hidden" name="stress" value="{{ stress }}">
+            
+            {% for q in questions %}
+            <div class="question-block">
+                <div class="question-header">
+                    <div class="question-text">{{ loop.index }}. {{ q.question }}</div>
+                    <span class="level-badge level-{{ q.level }}">{{ q.level }}</span>
+                </div>
+                <input type="text" name="q{{ loop.index0 }}" placeholder="Your answer..." required>
+            </div>
+            {% endfor %}
+            
+            <button type="submit">Generate Personalized Plan →</button>
+        </form>
+    </div>
+</body>
+</html>
